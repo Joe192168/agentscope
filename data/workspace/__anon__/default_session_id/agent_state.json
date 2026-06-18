@@ -1,0 +1,118 @@
+{
+  "session_id" : "default_session_id",
+  "user_id" : null,
+  "summary" : "",
+  "context" : [ {
+    "id" : "90ca7028-1b21-4dba-9752-3b46df24b365",
+    "name" : null,
+    "role" : "USER",
+    "content" : [ {
+      "type" : "text",
+      "text" : "西安天气怎么样？"
+    } ],
+    "metadata" : { },
+    "timestamp" : "2026-06-18 11:14:20.833",
+    "usage" : null
+  }, {
+    "id" : "99ed8c81-7692-9f92-8c75-3edd5058b78b",
+    "name" : "note-taker",
+    "role" : "ASSISTANT",
+    "content" : [ {
+      "type" : "thinking",
+      "thinking" : "用户询问西安的天气。\n我需要调用getWeather工具来获取西安的天气信息。\n参数：city = \"西安\"\n",
+      "metadata" : null
+    }, {
+      "type" : "tool_use",
+      "id" : "call_21b1b3f5bcfb42929493f797",
+      "name" : "getWeather",
+      "input" : {
+        "city" : "西安"
+      },
+      "content" : "{\"city\": \"西安\"}",
+      "metadata" : { },
+      "state" : "allowed"
+    } ],
+    "metadata" : {
+      "_chat_usage" : {
+        "inputTokens" : 285,
+        "outputTokens" : 54,
+        "time" : 1.847,
+        "totalTokens" : 339
+      }
+    },
+    "timestamp" : "2026-06-18 11:14:22.832",
+    "usage" : {
+      "inputTokens" : 285,
+      "outputTokens" : 54,
+      "time" : 1.847,
+      "totalTokens" : 339
+    }
+  }, {
+    "id" : "79d5c308-e6e2-4b5b-aa1c-73debf0ceba5",
+    "name" : "note-taker",
+    "role" : "TOOL",
+    "content" : [ {
+      "type" : "tool_result",
+      "id" : "call_21b1b3f5bcfb42929493f797",
+      "name" : "getWeather",
+      "output" : [ {
+        "type" : "text",
+        "text" : "\"城市：西安天气查询结果，具体结果如下：晴转多云\""
+      } ],
+      "metadata" : { },
+      "state" : "running"
+    } ],
+    "metadata" : { },
+    "timestamp" : "2026-06-18 11:14:22.921",
+    "usage" : null
+  }, {
+    "id" : "0e417d3f-d43b-99ed-a8ea-3c4dbcd78135",
+    "name" : "note-taker",
+    "role" : "ASSISTANT",
+    "content" : [ {
+      "type" : "thinking",
+      "thinking" : "思考过程：1.  **分析输入**：用户询问“西安天气怎么样？”，我已经调用了`getWeather`工具并获得了返回结果：“城市：西安天气查询结果，具体结果如下：晴转多云”。\n2.  **提取信息**：城市是“西安”，天气状况是“晴转多云”。\n3.  **构建回复**：将提取到的信息转化为自然、友好的语言回复给用户。例如：“西安今天的天气是晴转多云。” 或者更详细一点：“为您查询到西安的天气情况：晴转多云。”\n4.  **最终输出**：直接回答用户的提问，清晰明了。清爽的回复如：“西安现在的天气是**晴转多云**。”或者“西安的天气是晴转多云。”\n",
+      "metadata" : null
+    }, {
+      "type" : "text",
+      "text" : "西安的天气是**晴转多云**。"
+    } ],
+    "metadata" : {
+      "_chat_usage" : {
+        "inputTokens" : 344,
+        "outputTokens" : 171,
+        "time" : 3.83,
+        "totalTokens" : 515
+      }
+    },
+    "timestamp" : "2026-06-18 11:14:26.756",
+    "usage" : {
+      "inputTokens" : 344,
+      "outputTokens" : 171,
+      "time" : 3.83,
+      "totalTokens" : 515
+    }
+  } ],
+  "reply_id" : "a0c404dca8f643efba44804eda9f87f6",
+  "cur_iter" : 0,
+  "shutdown_interrupted" : false,
+  "permission_context" : {
+    "mode" : "default",
+    "working_directories" : { },
+    "allow_rules" : { },
+    "deny_rules" : { },
+    "ask_rules" : { }
+  },
+  "tool_context" : {
+    "max_cache_files" : 100,
+    "max_cache_bytes" : 25000.0,
+    "activated_groups" : [ ]
+  },
+  "tasks_context" : {
+    "tasks" : [ ]
+  },
+  "plan_mode_context" : {
+    "plan_active" : false,
+    "current_plan_file" : null
+  }
+}
