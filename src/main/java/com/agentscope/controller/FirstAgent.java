@@ -10,14 +10,19 @@ import io.agentscope.core.model.DashScopeChatModel;
 import io.agentscope.core.model.OllamaChatModel;
 import io.agentscope.core.model.ollama.OllamaOptions;
 import io.agentscope.core.model.ollama.ThinkOption;
+import io.agentscope.core.permission.PermissionContextState;
+import io.agentscope.core.permission.PermissionMode;
 import io.agentscope.core.state.InMemoryAgentStateStore;
 import io.agentscope.core.state.JsonFileAgentStateStore;
 import io.agentscope.core.tool.Toolkit;
+import io.agentscope.core.tool.file.ReadFileTool;
+import io.agentscope.core.tool.file.WriteFileTool;
 import io.agentscope.core.tracing.OtelTracingMiddleware;
 import io.agentscope.harness.agent.HarnessAgent;
 import io.agentscope.harness.agent.memory.compaction.CompactionConfig;
 
 import java.nio.file.Paths;
+import java.security.PermissionCollection;
 
 public class FirstAgent {
     public static void main(String[] args) {
@@ -70,6 +75,12 @@ public class FirstAgent {
     public static void agentWithMetaTool() {
         Toolkit toolkit = new Toolkit();
         toolkit.registerTool(new WeaterTools());
+        toolkit.registerTool(new WriteFileTool("E:\\工作文件\\AI游戏"));
+        toolkit.registerTool(new ReadFileTool("E:\\工作文件\\AI游戏"));
+
+        PermissionContextState contextState = PermissionContextState.builder()
+            .mode(PermissionMode.DEFAULT).build();
+
         ReActAgent agent = ReActAgent.builder()
             .name("note-taker")
             .sysPrompt("你是一个智能助手，可以回答各种问题。")
@@ -94,10 +105,17 @@ public class FirstAgent {
             .toolkit(toolkit)
             .middleware(new OtelTracingMiddleware())
             .stateStore(new JsonFileAgentStateStore(Paths.get("./data", "workspace")))
+            .permissionContext(contextState)
             .build();
 
-        Msg block = agent.call(new UserMessage("西安天气怎么样？")).block();
-        System.out.println(block.getTextContent());
+        /*Msg block = agent.call(new UserMessage("西安天气怎么样？")).block();
+        System.out.println(block.getTextContent());*/
+
+        /*Msg block1 = agent.call(new UserMessage("帮我写一个文件，文件名是test.txt，内容是今天天气真好")).block();
+        System.out.println(block1.getTextContent());*/
+
+        Msg block2 = agent.call(new UserMessage("帮我读一下test.txt文件的内容")).block();
+        System.out.println(block2.getTextContent());
     }
 
 }
